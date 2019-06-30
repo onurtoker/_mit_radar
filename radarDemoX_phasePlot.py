@@ -10,9 +10,7 @@ NS = 441
 fLen = 2**14
 gLen = 250
 
-rate, dataC = scipy.io.wavfile.read('C:\\Users\\otoker\\Desktop\\Projects\\PyProjects\\radar\\delayLine.wav')
-#rate, dataX = scipy.io.wavfile.read('C:\\Users\\otoker\\Desktop\\Projects\\PyProjects\\radar\\near.wav')
-#rate, dataX = scipy.io.wavfile.read('C:\\Users\\otoker\\Desktop\\Projects\\PyProjects\\radar\\far.wav')
+rate, dataC = scipy.io.wavfile.read('data/delayLine.wav')
 
 chC = dataC[:,0]
 dataC = chC.reshape((-1,))
@@ -40,6 +38,9 @@ while True:
 
     pc = np.unwrap(np.angle(hilbert(sc)))
     pc_fig.set_ydata(np.diff(pc) * 180 / np.pi)
+
+    # pm[1].relim()
+    # pm[1].autoscale_view()
 
     plt.draw()
     plt.pause(0.001)

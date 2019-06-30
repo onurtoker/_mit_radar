@@ -10,11 +10,11 @@ N2 = 1
 NC = N1 * N2
 fLen = 2**14
 gLen = 250
-#NFB = 2048
 
 rate, dataX = scipy.io.wavfile.read('data/delayLine.wav')
 #rate, dataX = scipy.io.wavfile.read('data/near.wav')
 #rate, dataX = scipy.io.wavfile.read('data/far.wav')
+dataX = dataX.astype(np.float)
 
 ch1 = dataX[:,0]
 dataX =  ch1.reshape((ch1.shape[0],))
