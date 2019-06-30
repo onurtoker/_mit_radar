@@ -12,9 +12,9 @@ fLen = 2**14
 gLen = 250
 #NFB = 2048
 
-rate, dataX = scipy.io.wavfile.read('C:\\Users\\otoker\\Desktop\\PyProjects\\radar\\delayLine.wav')
-#rate, dataX = scipy.io.wavfile.read('C:\\Users\\otoker\\Desktop\\PyProjects\\radar\\near.wav')
-#rate, dataX = scipy.io.wavfile.read('C:\\Users\\otoker\\Desktop\\PyProjects\\radar\\far.wav')
+rate, dataX = scipy.io.wavfile.read('data/delayLine.wav')
+#rate, dataX = scipy.io.wavfile.read('data/near.wav')
+#rate, dataX = scipy.io.wavfile.read('data/far.wav')
 
 ch1 = dataX[:,0]
 dataX =  ch1.reshape((ch1.shape[0],))
@@ -31,7 +31,7 @@ ax1.set_xlim(0,10000)
 ax1.set_ylabel('IF spectrum')
 #pkLabel = ax2.text(0, 0, '')
 #ax2.set_ylim(4990,5000)
-ax2.set_ylim(5250,5350)
+#ax2.set_ylim(5250,5350)
 ax2.set_ylabel('PeakLog')
 plt.draw()
 plt.pause(0.005)
