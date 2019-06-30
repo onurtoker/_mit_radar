@@ -6,13 +6,13 @@ from scipy.signal import hilbert
 import scipy.io.wavfile
 
 fs = 44100
-NS = 441*4
+NS = 441
 fLen = 2**14
 gLen = 250
 
-rate, dataC = scipy.io.wavfile.read('C:\\Users\\otoker\\Desktop\\Projects\\PyProjects\\radar\\delayLine.wav')
-rate, dataX = scipy.io.wavfile.read('C:\\Users\\otoker\\Desktop\\Projects\\PyProjects\\radar\\near.wav')
-#rate, dataX = scipy.io.wavfile.read('C:\\Users\\otoker\\Desktop\\Projects\\PyProjects\\radar\\far.wav')
+rate, dataC = scipy.io.wavfile.read('data/delayLine.wav')
+rate, dataX = scipy.io.wavfile.read('data/near.wav')
+#rate, dataX = scipy.io.wavfile.read('data/far.wav')
 
 chX = dataX[:,0]
 dataX = chX.reshape((-1,))
