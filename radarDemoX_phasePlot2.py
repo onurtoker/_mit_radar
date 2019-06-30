@@ -9,7 +9,7 @@ fs = 44.1e3
 NS = round(10 * fs / 1000)
 fLen = 2**16
 
-rate, dataX = scipy.io.wavfile.read('data/delayLine_10ms.wav')
+rate, dataX = scipy.io.wavfile.read('data/delayLong_10ms.wav')
 dataX = dataX.astype(np.float)
 
 chC = dataX[:,0]
@@ -21,7 +21,7 @@ f = fftfreq(fLen, 1/fs)
 
 fig, pm  = plt.subplots(2, 1)
 sc_fig = pm[0].plot(np.zeros(NS))[0]
-pc_fig = pm[1].plot(np.zeros(NS-1))[0]
+pc_fig = pm[1].plot(np.zeros(NS))[0]
 
 #pm[0].set_ylim(-32000,32000)
 pm[0].set_ylabel('IF signal')
@@ -52,8 +52,8 @@ try:
 
         pc = np.unwrap(np.angle(hilbert(sc)))
         pc = pc - pc[0]
-        #pc_fig.set_ydata(pc)
-        pc_fig.set_ydata(np.diff(pc) * 180 / np.pi)
+        pc_fig.set_ydata(pc)
+        #pc_fig.set_ydata(np.diff(pc) * 180 / np.pi)
 
         if (scaled == False):
             pm[0].relim()
