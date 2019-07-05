@@ -13,6 +13,7 @@ from scipy.signal import hilbert
 ##import scipy.signal
 import pyaudio
 from six.moves import queue
+import threading
 
 fs = 44100                      # sampling frequency in Hz
 td = 10                         # sweep duration in ms
@@ -29,6 +30,7 @@ buff = queue.Queue()
 def audio_callback(in_data, frame_count, time_info, status_flags):
     """Continuously collect data from the audio stream, into the buffer."""
     buff.put(in_data)
+    #print(threading.current_thread())
     return None, pyaudio.paContinue
 
 p = pyaudio.PyAudio()
@@ -50,12 +52,13 @@ de_fig = ax[1,1].plot(np.arange(-gLen,0), np.zeros(gLen))[0]
 plt.draw()
 plt.pause(0.005)
 
+#print(threading.current_thread())
+
 data = np.zeros((2 * NS, 2))
 while True:
 
-    # capture 2 frames
+    # read at least two frames
     i = 0
-    buff.queue.clear()
     while (i < 2 * NS):
         chunk = np.frombuffer(buff.get(), dtype=np.int16)        
         chunk = chunk.reshape((-1,2))
@@ -68,6 +71,10 @@ while True:
         data[i:i+cle, 0] = chunk[:cle,0]
         data[i:i+cle, 1] = chunk[:cle,1]
         i += cle
+
+    # clear queue (Overflow protection)
+    buff.queue.clear()
+
 
     # find start and plot
     der = np.diff(data[:NS,1])
